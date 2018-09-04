@@ -62,9 +62,9 @@ GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 10
 
-Use sua consulta para retornar o e-mail, nome, sobrenome e gênero de todos os ouvintes
+/* Use sua consulta para retornar o e-mail, nome, sobrenome e gênero de todos os ouvintes
 de Rock. Retorne sua lista ordenada alfabeticamente por endereço de e-mail,começando por A.
-Você consegue encontrar um jeito de lidar com e-mailsduplicados para que ninguém receba vários e-mails?
+Você consegue encontrar um jeito de lidar com e-mailsduplicados para que ninguém receba vários e-mails? */
 
 SELECT DISTINCT c.Email,c.FirstName,c.LastName,g.name
 FROM Genre g
@@ -79,9 +79,9 @@ ON c.CustomerId = i.CustomerId
 WHERE g.name = 'Rock'
 Order by 1
 
-Vamos convidar os artistas que mais escreveram as músicas de rock em nosso banco de dados. 
+/* Vamos convidar os artistas que mais escreveram as músicas de rock em nosso banco de dados. 
 Escreva uma consulta que retorna o nome do Artist (artista) e a contagem total de músicas das
-dez melhores bandas de rock.
+dez melhores bandas de rock. */
 
 SELECT ar.ArtistId,ar.Name,COUNT(t.Name) Songs
 FROM Track t
@@ -95,7 +95,7 @@ WHERE g.Name = 'Rock'
 GROUP BY 2
 Order by 3 DESC
 
-Primeiro, descubra qual artista ganhou mais de acordo com InvoiceLines (linhas de faturamento)
+/* Primeiro, descubra qual artista ganhou mais de acordo com InvoiceLines (linhas de faturamento) */
 
 SELECT ar.ArtistId,ar.Name, SUM(i.UnitPrice*i.Quantity) Total
 FROM Track t
@@ -110,7 +110,7 @@ ON i.TrackId = t.TrackId
 GROUP BY 1
 ORDER BY 3 DESC
 
-Agora use este artista para encontrar qual cliente gastou mais com este artista.
+/* Agora use este artista para encontrar qual cliente gastou mais com este artista. */
 
 WITH table1 AS (SELECT inv.CustomerId Cust_,SUM(i.UnitPrice*i.Quantity) Tot_
 FROM InvoiceLine i
@@ -129,13 +129,13 @@ SELECT table1.Cust_,table1.Tot_
 FROM table1
 ORDER BY 2 DESC
 
-Queremos descobrir o gênero musical mais popular em cada país. Determinamos o gênero
+/* Queremos descobrir o gênero musical mais popular em cada país. Determinamos o gênero
  mais popular como o gênero com o maior número de compras. Escreva uma consulta que
  retorna cada país juntamente a seu gênero mais vendido. Para países onde o número
  máximo de compras é compartilhado retorne todos os gêneros.
 
 Para essa consulta você precisará usar as tabelas Invoice (fatura), InvoiceLine
- (linha de faturamento), Track (música), Customer (cliente) e Genre (gênero).
+ (linha de faturamento), Track (música), Customer (cliente) e Genre (gênero). */
 
 WITH table1 AS (SELECT SUM(Quantity) Total, c.Country, g.Name , g.GenreId
 FROM Track t
